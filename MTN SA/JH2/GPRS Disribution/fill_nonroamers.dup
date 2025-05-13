@@ -1,0 +1,8 @@
+CONST INTEGER main(theSource CONST MTN-GPRS.GPRS-CSV2)
+{
+	if(left(theSource.servedIMSI,4,4) == '6551'H){
+		return 1;
+	}else{
+		return 0;
+	}
+}

@@ -1,0 +1,4 @@
+CONST INTEGER main(theSource CONST MTN-GPRS.GPRS-CSV2)
+{
+    return((theSource.recordType == 19) OR (theSource.recordType == 70));
+}
