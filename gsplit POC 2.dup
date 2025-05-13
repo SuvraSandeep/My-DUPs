@@ -1,0 +1,33 @@
+CONST INTEGER main(theCallNr CONST INTEGER, theTarget POC_Split_function.CallDetailRecord, theSource CONST POC_Split_function.CallDetailRecord)
+{
+	declare parts SEQUENCE OF IA5String;
+	declare size INTEGER;
+	declare static i  INTEGER;
+	declare tmpCounter INTEGER;
+	theTarget ::= theSource;
+	
+	tmpCounter ::= theCallNr;
+	__print("starting");
+	
+	if (isDefined (theSource.metadata))
+		{
+			gsplit(theSource.metadata,"|", parts);
+			size ::= sizeof(parts);
+			
+			if (tmpCounter == 0)
+				{
+					i ::= size;
+				}
+			i -= 1;
+			if (i > 0)
+				{
+					__print(i);
+					__print("second loop");
+					theTarget.metadata ::= parts[i];
+					return 1;
+				}
+			theTarget.metadata ::= parts[0];
+			__print("exit");
+			return 0;
+		}
+}
