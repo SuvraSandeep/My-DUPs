@@ -1,0 +1,11 @@
+CONST INTEGER main(theSource CONST POC_Split_function.CallDetailRecord)
+{
+	if(isDefined(theSource.countryCode) && theSource.countryCode == "IN")
+	{
+	return 1;
+	}
+	else
+	{
+	return 0;
+	}
+}
