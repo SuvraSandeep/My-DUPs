@@ -1,0 +1,38 @@
+CONST INTEGER main(theCallNr CONST INTEGER, theTarget POC_Split_function.CallDetailRecord, theSource CONST POC_Split_function.CallDetailRecord)
+{
+	declare tmpCDR POC_Split_function.CallDetailRecord;
+	declare callername IA5String;
+	declare serviceplan IA5String;
+	declare count INTEGER;
+	
+	count ::= 0;
+	tmpCDR ::= theSource;
+	theTarget ::= tmpCDR;
+	__print("Starting");
+	if (isDefined(theSource.metadata) && theSource.metadata != "")
+	{
+		__print("isDefined metadata");
+		split(tmpCDR.metadata, "|" , callername , serviceplan);
+		__print("callername");
+		__print(callername);
+		__print("serviceplan");
+		__print(serviceplan);
+	}
+	else
+	{
+		theTarget.metadata ::=
+		 "No metadata recieved";
+		return 0;
+	}
+	if (theCallNr == 0)
+		{
+		__print("caller name defined");
+		__print(callername);
+		theTarget.metadata ::= callername;
+		count += 1;
+		return count;
+		}
+		__print("serviceplan is defined");
+		theTarget.metadata ::= serviceplan;
+	return 0;
+}
