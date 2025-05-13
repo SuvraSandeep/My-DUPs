@@ -1,0 +1,5 @@
+VOID formatCDR(theTarget CME20R11MSCber-New.UMTSGSMPLMNCallDataRecord, 
+		theSource CONST MSSR13Aber.UMTSGSMPLMNCallDataRecord); 
+--------
+VOID convertEventModule(theTarget CME20R11MSCber-New.UMTSGSMPLMNCallDataRecord, 
+			theSource CONST MSSR13Aber.UMTSGSMPLMNCallDataRecord);
