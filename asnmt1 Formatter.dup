@@ -1,0 +1,55 @@
+CONST INTEGER main(theCallNr CONST INTEGER, theTarget Asnmt_OP_DS.Record, theSource CONST Asnmt_1.Record)
+{
+	declare tmp IA5String;
+	declare dev IA5String;
+	declare int1 INTEGER;
+	declare i INTEGER;
+	declare tmpstr2 IA5String;
+	declare tmpstr IA5String;
+
+	theTarget ::= theSource;
+	tmp ::= "Suvra";
+	dev ::= theSource.location;
+	
+	sys_setGenericString("def", tmp);						--setting generic string
+	sys_setGenericString("udef", "Sandeep");				--setting generic string
+--	theTarget.imsi ::= theSource.recordSequenceNumber;		--setting record type to hostname		 
+	theTarget.recordType ::= sys_hostName();               
+
+
+
+----- changing kolkata to DLF-------
+	if (left(dev, 3, 8)=="Kol")
+	{
+--		__print("ENTERED THE LOCATION IF LOOP");
+		theTarget.location ::= "DLF IT park 2, kolkata";
+--		__print(theTarget.location);
+--		__print("EXITED THE LOCATION IF LOOP");
+	}
+	
+------changing octet string to INTEGER---------
+
+	int1 ::= string2Integer(theSource.recordSequenceNumber);
+	
+	if (int1 >= 0)
+	{
+		__print("octet string to INTEGER Conversion successful");
+		theTarget.recordSequenceNumber ::= int1;
+	}
+	else 
+	
+	{
+		__print("Conversion unsucessful");
+	}
+
+------for loop poc-------------------
+	for (i::= 0 ; i < 10 ; i+=1)
+		{
+		tmpstr2 ::= 
+					"for worked for = ";
+		tmpstr ::= concatStrings(tmpstr2, integer2String(i));
+		__print (tmpstr) ;
+		}
+
+	return 0;
+}	
