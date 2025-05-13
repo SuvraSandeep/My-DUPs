@@ -1,0 +1,12 @@
+CONST INTEGER main(theCallNr CONST INTEGER, theTarget POC_Split_function.CallDetailRecord, theSource CONST POC_Split_function.CallDetailRecord)
+{
+declare key IA5String;
+declare tmp IA5String;
+
+theTarget ::= theSource;
+
+key ::= theSource.countryCode;
+lookup("lookup_poc_1_memory_table", key, tmp);
+theTarget.countryCode ::= tmp;
+return 0;
+}
