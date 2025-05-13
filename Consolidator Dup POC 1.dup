@@ -1,0 +1,50 @@
+CONST INTEGER main(theCallNr CONST INTEGER, theTarget Consolidator_IP_POC.CallDetailRecord, theSource CONST Consolidator_IP_POC.CallDetailRecord)
+{
+	declare theKey IA5String;
+	declare tmpCDR Consolidator_IP_POC.CallDetailRecord;
+	declare negval INTEGER;
+	negval ::= -1;
+__print("Starting");
+---Creating consolidation key---
+	
+	if (isDefined(theSource.callerNumber))
+		{
+		theKey ::= theSource.callerNumber;
+		}
+	else
+		{
+		__print("else for is defined entered");
+		raise("No caller number : Can't set the KEY for consolidation");
+		}
+		
+---checking the CDR in the memory---
+	
+	if (getAndRemoveCDR(theKey,tmpCDR))
+		{
+		__print("tmpCDR");
+		__print(tmpCDR);
+		tmpCDR.duration += theSource.duration;
+		
+		if (theSource.sq_no == "1")
+			{
+			__print("last sqnumber is entered");
+			tmpCDR.segment ::= "Complete segment";
+			theTarget ::= tmpCDR;
+			clear (tmpCDR);
+			return 0;
+			}
+		else
+			{
+			__print("Waiting for last sq_no");
+			putCDR(theKey,tmpCDR);
+			return negval;
+			}
+		}
+	else
+		{
+		__print("entered first else for the first CDR");
+		tmpCDR ::= theSource;
+		putCDR(theKey,tmpCDR);
+		return negval;
+		}
+}
