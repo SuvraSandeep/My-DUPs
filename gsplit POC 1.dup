@@ -1,0 +1,26 @@
+CONST INTEGER main(theCallNr CONST INTEGER, theTarget POC_Split_function.CallDetailRecord, theSource CONST POC_Split_function.CallDetailRecord)
+{
+	declare tmpcdr POC_Split_function.CallDetailRecord;
+	declare parts SEQUENCE OF IA5String;
+	declare i INTEGER;
+	declare size INTEGER;
+	declare count INTEGER;
+	
+	count ::= theCallNr;
+	tmpcdr ::= theSource;
+	theTarget ::= tmpcdr;
+	
+	if (isDefined(tmpcdr.metadata) && tmpcdr.metadata != "")
+	{
+	size ::= sizeof(parts);
+	}
+	else
+	{
+	theTarget.metadata ::= "empty metadata in the source";
+	}
+	for (i::=0;i < size; i += 1 )
+		{
+		__print(parts[i]);
+		}
+	return 0;
+}
