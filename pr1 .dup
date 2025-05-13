@@ -1,0 +1,17 @@
+CONST INTEGER main(theSource CONST CHARGINGCDR_MTNSA_data.ChargingDataOutputRecord)
+{
+    declare i INTEGER;
+ 
+    if(isDefined(theSource.onlineCreditControlRecord) && isDefined(theSource.onlineCreditControlRecord.creditControlRecords))
+    {
+        for(i::=0; i<sizeof(theSource.onlineCreditControlRecord.creditControlRecords); i+=1)
+        {
+            if(isDefined(theSource.onlineCreditControlRecord.creditControlRecords[i].creditControlRecord.appliedProductFees))
+                return 2;
+            if(isDefined(theSource.onlineCreditControlRecord.creditControlRecords[i].creditControlRecord.bonusAdjustment))
+                return 3;
+        }
+        return 1;
+    }
+    return 0
+}
