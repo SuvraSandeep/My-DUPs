@@ -1,0 +1,18 @@
+CONST INTEGER main(theSource CONST MTN-GPRS.GPRS-CSV2)
+{
+    if ((theSource.recordType == 19) OR (theSource.recordType == 70))
+        {
+            if(left(theSource.servedIMSI,4,4) == '6551'H)
+                {
+		            return 1;
+	             }
+            else
+                {
+		            return 0;
+	            }
+        }
+    else
+    {
+        return 0;
+    }
+}
