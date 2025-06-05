@@ -1,3 +1,7 @@
+-- Modified by EDWISUV  
+-- Description: Integrated two value routers - 'fill_gprs_sgsn.dup' and 'fill_nonroamers.dup'.
+
+
 CONST INTEGER main(theSource CONST MTN-GPRS.GPRS-CSV2)
 {
     if ((theSource.recordType == 19) OR (theSource.recordType == 70))
